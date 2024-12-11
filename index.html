@@ -59,29 +59,60 @@
             scene.clear(); // Xóa cảnh hiện tại
             if (sceneType === "gym") {
                 // Thêm không gian phòng gym
-                scene.background = new THREE.Color(0xaaaaaa); // Màu phòng gym
-                const gymEquipment = new THREE.BoxGeometry(1, 0.5, 0.5); // Dụng cụ tạ
-                const gymMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-                const gymMesh = new THREE.Mesh(gymEquipment, gymMaterial);
-                gymMesh.position.set(0, 0.25, 0);
-                scene.add(gymMesh);
+                scene.background = new THREE.Color(0xaaaaaa);
+                addGymDetails();
             } else if (sceneType === "kitchen") {
                 // Thêm không gian nhà bếp
-                scene.background = new THREE.Color(0xffccaa); // Màu nhà bếp
-                const table = new THREE.BoxGeometry(2, 0.1, 1); // Bàn bếp
-                const tableMaterial = new THREE.MeshBasicMaterial({ color: 0x8b4513 });
-                const tableMesh = new THREE.Mesh(table, tableMaterial);
-                tableMesh.position.set(0, 0.5, 0);
-                scene.add(tableMesh);
+                scene.background = new THREE.Color(0xffccaa);
+                addKitchenDetails();
             } else if (sceneType === "competition") {
                 // Thêm không gian sàn đấu
-                scene.background = new THREE.Color(0xffffaa); // Màu sàn đấu
-                const stage = new THREE.BoxGeometry(3, 0.1, 2); // Sân khấu
-                const stageMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-                const stageMesh = new THREE.Mesh(stage, stageMaterial);
-                stageMesh.position.set(0, 0.1, 0);
-                scene.add(stageMesh);
+                scene.background = new THREE.Color(0xffffaa);
+                addCompetitionDetails();
             }
+        }
+
+        // Thêm chi tiết phòng gym
+        function addGymDetails() {
+            const benchGeometry = new THREE.BoxGeometry(2, 0.2, 0.6);
+            const benchMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+            const bench = new THREE.Mesh(benchGeometry, benchMaterial);
+            bench.position.set(0, 0.1, 0);
+            scene.add(bench);
+
+            const dumbbellGeometry = new THREE.CylinderGeometry(0.1, 0.1, 1);
+            const dumbbellMaterial = new THREE.MeshBasicMaterial({ color: 0x888888 });
+            const dumbbell = new THREE.Mesh(dumbbellGeometry, dumbbellMaterial);
+            dumbbell.position.set(0.5, 0.5, 0);
+            scene.add(dumbbell);
+        }
+
+        // Thêm chi tiết nhà bếp
+        function addKitchenDetails() {
+            const tableGeometry = new THREE.BoxGeometry(2, 0.2, 1);
+            const tableMaterial = new THREE.MeshBasicMaterial({ color: 0x8b4513 });
+            const table = new THREE.Mesh(tableGeometry, tableMaterial);
+            table.position.set(0, 0.1, 0);
+            scene.add(table);
+
+            const potGeometry = new THREE.CylinderGeometry(0.5, 0.5, 0.5);
+            const potMaterial = new THREE.MeshBasicMaterial({ color: 0xaaaaaa });
+            const pot = new THREE.Mesh(potGeometry, potMaterial);
+            pot.position.set(0, 0.6, 0);
+            scene.add(pot);
+        }
+
+        // Thêm chi tiết sàn thi đấu
+        function addCompetitionDetails() {
+            const stageGeometry = new THREE.BoxGeometry(3, 0.1, 2);
+            const stageMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+            const stage = new THREE.Mesh(stageGeometry, stageMaterial);
+            stage.position.set(0, 0.1, 0);
+            scene.add(stage);
+
+            const light = new THREE.PointLight(0xffffff, 1, 10);
+            light.position.set(0, 2, 0);
+            scene.add(light);
         }
 
         // Chuyển đổi cảnh
